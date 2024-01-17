@@ -1,28 +1,15 @@
-package com.dasith.learningspring.data;
+package com.dasith.learningspring.business;
 
+import javax.persistence.Column;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "GUEST")
-public class Guest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "GUEST_ID")
+public class GuestDTO {
     private long id;
-    @Column(name = "FIRST_NAME")
     private String firstName;
-    @Column(name="LAST_NAME")
     private String lastName;
-    @Column(name = "EMAIL_ADDRESS")
     private  String emailAddress;
-    @Column(name = "ADDRESS")
     private String address;
-    @Column(name="COUNTRY")
     private String country;
-    @Column(name = "STATE")
     private String state;
-    @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
     public long getId() {
@@ -87,19 +74,5 @@ public class Guest {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "Guest{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", address='" + address + '\'' +
-                ", country='" + country + '\'' +
-                ", state='" + state + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.dasith.learningspring.business;
 
 import com.dasith.learningspring.data.*;
+import com.dasith.learningspring.data.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,49 @@ public class ReservationService {
             }
         });
         return roomReservations;
+    }
+
+    public List<RoomDTO> getAllRooms(){
+        Iterable<Room> rooms=this.roomRepository.findAll();
+        List<RoomDTO> roomDTOList =new ArrayList<>();
+        rooms.forEach(room -> {
+            RoomDTO newRoomDTO =new RoomDTO();
+            newRoomDTO.setId(room.getId());
+            newRoomDTO.setName(room.getName());
+            newRoomDTO.setBedInfo(room.getBedInfo());
+            newRoomDTO.setRoomNumber(room.getRoomNumber());
+            roomDTOList.add(newRoomDTO);
+        });
+        return roomDTOList;
+    }
+    public List<GuestDTO> getAllGuests(){
+        Iterable<Guest> guests=this.guestRepository.findAll();
+        List<GuestDTO> guestDTOList =new ArrayList<>();
+        guests.forEach(guest -> {
+            GuestDTO newGuest =new GuestDTO();
+            newGuest.setId(guest.getId());
+            newGuest.setCountry(guest.getCountry());
+            newGuest.setAddress(guest.getAddress());
+            newGuest.setEmailAddress(guest.getEmailAddress());
+            newGuest.setState(guest.getState());
+            newGuest.setPhoneNumber(guest.getPhoneNumber());
+            newGuest.setFirstName(guest.getFirstName());
+            newGuest.setLastName(guest.getLastName());
+            guestDTOList.add(newGuest);
+        });
+        return guestDTOList;
+    }
+
+    public Guest addGuest(GuestDTO guestDTO){
+        Guest guest=new Guest();
+        guest.setId(guestDTO.getId());
+        guest.setAddress(guestDTO.getAddress());
+        guest.setCountry(guestDTO.getCountry());
+        guest.setState(guestDTO.getState());
+        guest.setEmailAddress(guestDTO.getEmailAddress());
+        guest.setFirstName(guestDTO.getFirstName());
+        guest.setLastName(guestDTO.getLastName());
+        guest.setPhoneNumber(guestDTO.getPhoneNumber());
+        return this.guestRepository.save(guest);
     }
 }
