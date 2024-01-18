@@ -97,4 +97,7 @@ public class ReservationService {
         guest.setPhoneNumber(guestDTO.getPhoneNumber());
         return this.guestRepository.save(guest);
     }
+    public Room getRoomById(long id){
+        return roomRepository.getById(id);
+    }
 }
